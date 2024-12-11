@@ -1,18 +1,23 @@
 import ListTask from "../components/ListTask";
 import { useAppSelector } from "../redux/hooks";
 
-function Dashboard() {
-  const tasks = useAppSelector((state: any) => state.tasks);
-  console.log(tasks);
+
+const dashboard = () => {
+  const { tasksList } = useAppSelector((state: any) => state.tasks);
+
+  
+
   return (
-    <div className="w-full">
-      <div className="h-180px">project details</div>
+    <div className="w-[calc(100vw-288px)] w-min-[400px]">
+      <div className="h-[180px] border-b-[2px] border-[#E6E8EC]">
+        project details
+      </div>
       {/*  drag and drop section*/}
-      <div>
-        <ListTask tasksList = {tasks}/>
+      <div className="h-[calc(100vh-260px)] bg-[#F4F5F6]">
+        <ListTask tasksList={tasksList} />
       </div>
     </div>
   );
-}
+};
 
-export default Dashboard;
+export default dashboard;

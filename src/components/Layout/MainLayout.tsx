@@ -25,12 +25,12 @@ function MainLayout() {
   }, []);
 
   return (
-    <div>
+    <div className="no-scrollbar">
       {/* header */}
       <Header />
       <div className="flex h-[calc(100vh-80px)]">
-        <Sidebar showNav={showNav} />
         {/* sidebar */}
+        <Sidebar showNav={showNav} />
         {/* dashboard */}
         <Outlet />
       </div>

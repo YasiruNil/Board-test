@@ -1,7 +1,39 @@
-[
+{
+  "data": [
     {
-        "id":"123",
-        "title": "new",
-        "status": "todo"
+      "id": "1234",
+      "color": "#AEE753",
+      "title": "Research",
+      "description": "User Interview",
+      "status": "To Do"
+    },
+    {
+      "id": "12345",
+      "color": "#F90430",
+      "title": "Design",
+      "description": "User Interview",
+      "status": "To Do"
+    },
+    {
+      "id": "123456",
+      "color": "#3772FF",
+      "title": "FeedBack",
+      "description": "Check Clients Feedback",
+      "status": "In Progress"
+    },
+    {
+      "id": "2233424",
+      "color": "#FF5C00",
+      "title": "Presentation",
+      "description": "Copy Write",
+      "status": "In Progress"
+    },
+    {
+      "id": "5234234",
+      "color": "#777E90",
+      "title": "Other",
+      "description": "Speech",
+      "status": "Approved"
     }
-]
+  ]
+}

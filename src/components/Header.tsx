@@ -19,7 +19,7 @@ const Header = () => {
   return (
     <div className="custom-header">
       <div className="flex justify-center items-center mx-5">
-        <img src={board} alt="plus" className="w-5 h-5 mx-2" />
+        <img src={board} alt="board" className="w-5 h-5 mx-2" />
         <span className="text-black font-bold">Board</span>{" "}
         <span className="mx-1 text-primary font-bold">App</span>
       </div>
@@ -33,15 +33,15 @@ const Header = () => {
           Create new board
         </CustomButton>
         <CustomInput
-          prefix={<img src={search} alt="plus" className="w-5 h-5" />}
+          prefix={<img src={search} alt="search" className="w-5 h-5" />}
           onChange={() => handleSearch()}
           suffix={null}
           text="Search tasks..."
         />
         <div className="flex space-x-3 mx-5 items-center">
-          <img src={setting} alt="plus" className="w-5 h-5 mx-2" />
-          <img src={bell} alt="plus" className="w-5 h-5 mx-2" />
-          <img src={image} alt="plus" className="w-5 h-5 mx-2" />
+          <img src={setting} alt="setting" className="w-5 h-5 mx-2" />
+          <img src={bell} alt="bell" className="w-5 h-5 mx-2" />
+          <img src={image} alt="image" className="w-5 h-5 mx-2" />
         </div>
       </div>
     </div>

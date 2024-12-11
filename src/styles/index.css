@@ -16,7 +16,8 @@
 
 @font-face {
   font-family: "Poppins";
-  src: local("Poppins"), url("../assets/fonts/Poppins-SemiBold.ttf") format("ttf");
+  src: local("Poppins"),
+    url("../assets/fonts/Poppins-SemiBold.ttf") format("ttf");
 }
 
 .board-add {
@@ -28,5 +29,18 @@
   &:hover {
     color: #ffffff !important;
     background-color: var(--button-primary-color) !important;
+  }
+}
+
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    overflow-y: hidden;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
 }

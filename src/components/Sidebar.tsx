@@ -8,7 +8,7 @@ interface SidebarProps {
 function Sidebar({ showNav }: SidebarProps) {
   console.log(showNav);
   return (
-    <div className="w-[288px] h-full border-r-[1px] border-[#E6E8EC]">
+    <div className="w-[288px] min-w-[288px] h-full border-r-[1px] border-[#E6E8EC]">
       <div className="flex justify-center">
         <div className="border-[2px] border-[#E6E8EC] w-[240px] h-[64px] rounded-[8px] mt-[24px] flex items-center justify-between">
           <div className="flex items-center">
