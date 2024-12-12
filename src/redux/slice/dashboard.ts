@@ -10,7 +10,7 @@ import {
 import { DropResult } from "@hello-pangea/dnd";
 
 const initialState = {
-  tasks: JSON.parse(localStorage.getItem("tasks") || "[]") || {
+  tasks: localStorage.getItem("tasks") ? JSON.parse(localStorage.getItem("tasks") || "[]") : {
     tasksList: list.data,
     todoList: [],
     approvedList: [],
