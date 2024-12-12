@@ -1,5 +1,5 @@
-import plusBlack from "../assets/images/plus-black-icon.png";
-import dots from "../assets/images/dots-icon.svg";
+import plusBlack from "../assets/images/plusBlack.png";
+import dots from "../assets/images/dots.svg";
 import CardList from "./CardList";
 import Status from "./Status";
 
@@ -11,11 +11,11 @@ const section = ({ status }: any) => {
     useAppSelector((state: any) => state.tasks);
 
   return (
-    <div className="flex-row border-r-[1px] border-[#E6E8EC] h-full">
+    <div className="flex-row border-r-[1px] border-[#E6E8EC] overflow-hidden h-[calc(100vh-320px)]">
       {status && (
         <>
           <SectionHeader status={status} />
-          <div className="h-[calc(100vh-320px)] overflow-y-auto no-scrollbar">
+          <div className="h-[calc(100vh-380px)] overflow-y-auto no-scrollbar">
             {status === StatusConstants.todo ? (
               <CardList list={todoList}  />
             ) : (
@@ -63,7 +63,7 @@ const SectionHeader = ({ status }: any) => {
     bgColor = "#F90430";
   }
   return (
-    <div className="flex justify-between items-center py-3 px-3 border-[#E6E8EC] bg-[#ffff] border-[1px] border-r-[0px] h-[60px]">
+    <div className="flex justify-between items-center py-3 px-3 border-[#E6E8EC] bg-[#ffff] border-[1px] border-r-[0px] h-[60px] font-pop-semi">
       <Status status={status} color={color} bgColor={bgColor} />
       <div className="flex">
         <img src={plusBlack} alt="plus" className="w-[20px] h-[20px] m-[6px]" />

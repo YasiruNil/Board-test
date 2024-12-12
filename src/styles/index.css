@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -12,12 +13,6 @@
   --input-height: 48px;
 
   --text-primary-color: #3772ff;
-}
-
-@font-face {
-  font-family: "Poppins";
-  src: local("Poppins"),
-    url("../assets/fonts/Poppins-SemiBold.ttf") format("ttf");
 }
 
 .board-add {
@@ -39,7 +34,6 @@
   }
   /* Hide scrollbar for IE, Edge and Firefox */
   .no-scrollbar {
-    overflow-y: hidden;
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }

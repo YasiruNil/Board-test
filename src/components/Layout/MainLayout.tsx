@@ -25,7 +25,7 @@ function MainLayout() {
   }, []);
 
   return (
-    <div className="no-scrollbar">
+    <div className="no-scrollbar overflow-y-hidden">
       {/* header */}
       <Header />
       <div className="flex h-[calc(100vh-80px)]">

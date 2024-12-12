@@ -24,7 +24,7 @@ const CustomButton = ({
       className={`${type} flex justify-between`}
     >
       {prefix && <span className="mr-2">{prefix}</span>}
-      {children}
+      <span className="font-pop-semi text-base">{children}</span>
       {suffix && <span className="ml-2">{suffix}</span>}
     </Button>
   );

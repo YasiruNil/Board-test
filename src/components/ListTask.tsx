@@ -44,7 +44,7 @@ function ListTask({ tasksList }: any) {
     <div className="grid grid-cols-4">
       <DragDropContext onDragEnd={onDragEnd}>
         {statuses.map((status, index) => (
-          <Droppable key={index} droppableId={status} direction="vertical">
+          <Droppable key={index} droppableId={status} direction="vertical" >
             {(provided) => (
               <div ref={provided.innerRef} {...provided.droppableProps}>
                 <Section status={status}/>

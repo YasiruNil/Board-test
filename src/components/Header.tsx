@@ -1,10 +1,10 @@
 import CustomButton from "./CustomButton";
-import plus from "../assets/images/plus-icon.svg";
-import board from "../assets/images/board-icon.svg";
-import bell from "../assets/images/bell-icon.svg";
+import plus from "../assets/images/plus.svg";
+import board from "../assets/images/board.svg";
+import bell from "../assets/images/bell.svg";
 import image from "../assets/images/image.svg";
 import search from "../assets/images/search.svg";
-import setting from "../assets/images/setting-icon.svg";
+import setting from "../assets/images/setting.svg";
 import CustomInput from "./CustomInput";
 
 const Header = () => {
@@ -17,11 +17,11 @@ const Header = () => {
   };
 
   return (
-    <div className="custom-header">
+    <div className="custom-header font-pop-semi">
       <div className="flex justify-center items-center mx-5">
         <img src={board} alt="board" className="w-5 h-5 mx-2" />
-        <span className="text-black font-bold">Board</span>{" "}
-        <span className="mx-1 text-primary font-bold">App</span>
+        <span className="text-black font-semibold">Board</span>
+        <span className="mx-1 text-primary font-semibold">App</span>
       </div>
       <div className="flex gap-4">
         <CustomButton
