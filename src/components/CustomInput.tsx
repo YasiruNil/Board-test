@@ -5,7 +5,7 @@ interface CustomInputProps {
   text: string;
   prefix?: ReactNode;
   suffix?: ReactNode;
-  onChange: () => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const CustomInput = ({

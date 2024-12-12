@@ -6,15 +6,27 @@ import image from "../assets/images/image.svg";
 import search from "../assets/images/search.svg";
 import setting from "../assets/images/setting.svg";
 import CustomInput from "./CustomInput";
+import { useDebounce } from "use-debounce";
+import { useEffect, useState } from "react";
+import { useAppDispatch } from "../redux/hooks";
+import { searchList } from "../redux/slice/dashboard";
 
 const Header = () => {
+  const dispatch = useAppDispatch();
+  const [inputValue, setInputValue] = useState("");
+  // Debounce effect is added.useEffect will trigger if debounce value is changed.
+  const [debouncedValue] = useDebounce(inputValue, 500);
   const handleAddNewBoard = () => {
     console.log("add new board");
   };
 
-  const handleSearch = () => {
-    console.log("handleSearch");
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
   };
+
+  useEffect(() => {
+    dispatch(searchList(debouncedValue))
+  }, [debouncedValue]);
 
   return (
     <div className="custom-header font-pop-semi">
@@ -34,7 +46,7 @@ const Header = () => {
         </CustomButton>
         <CustomInput
           prefix={<img src={search} alt="search" className="w-5 h-5" />}
-          onChange={() => handleSearch()}
+          onChange={(e) => handleSearch(e)}
           suffix={null}
           text="Search tasks..."
         />

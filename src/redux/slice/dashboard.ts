@@ -16,6 +16,7 @@ const initialState = {
     approvedList: [],
     rejectedList: [],
     inProgressList: [],
+    searchValue: ''
   },
 } as TaskState;
 
@@ -23,6 +24,9 @@ const taskSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
+    searchList: (state: TaskState, action: PayloadAction<string>) => {
+      state.tasks.searchValue = action.payload;
+    },
     setTodoList: (state: TaskState, action: PayloadAction<TaskList[]>) => {
       state.tasks.todoList = action.payload;
     },
@@ -73,7 +77,7 @@ const taskSlice = createSlice({
             state.tasks
           );
         }
-
+        // update the initial list data(taskList). it is needed when reloading the page task list data will be considered.so tasklist should be updated as well
         updateTaskList(state.tasks);
       }
     },
@@ -210,6 +214,7 @@ const addMoveItemToTheRelaventGroup = (
 
 export const {
   moveTasks,
+  searchList,
   setTodoList,
   setRejectedList,
   setApprovedList,

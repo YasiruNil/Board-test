@@ -3,8 +3,9 @@ export interface TaskState {
 }
 
 export interface TaskGroup {
-  tasksList: TaskList[];
+  searchValue: string;
   todoList: TaskList[];
+  tasksList: TaskList[];
   approvedList: TaskList[];
   rejectedList: TaskList[];
   inProgressList: TaskList[];
