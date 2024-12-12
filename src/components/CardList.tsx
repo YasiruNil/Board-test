@@ -1,7 +1,9 @@
 import { Draggable } from "@hello-pangea/dnd";
-import Card from "./Card";
 
-const cardList = ({ list }: any) => {
+import Card from "./Card";
+import { TaskList } from "../interfaces/task.interface";
+
+const cardList = ({ list }: { list: TaskList[] }) => {
   return (
     <div className="flex flex-col items-center mx-3 m:mx-5 xl:mx-8">
       {list.map((item: any, index: any) => {

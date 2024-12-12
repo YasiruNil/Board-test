@@ -5,10 +5,11 @@ import Status from "./Status";
 
 import { StatusConstants } from "../util/constants";
 import { useAppSelector } from "../redux/hooks";
+import { TaskState } from "../interfaces/task.interface";
 
-const section = ({ status }: any) => {
+const section = ({ status }: { status: string }) => {
   const { todoList, approvedList, rejectedList, inProgressList } =
-    useAppSelector((state: any) => state.tasks);
+    useAppSelector((state: TaskState) => state.tasks);
 
   return (
     <div className="flex-row border-r-[1px] border-[#E6E8EC] overflow-hidden h-[calc(100vh-320px)]">
@@ -17,11 +18,11 @@ const section = ({ status }: any) => {
           <SectionHeader status={status} />
           <div className="h-[calc(100vh-380px)] overflow-y-auto no-scrollbar">
             {status === StatusConstants.todo ? (
-              <CardList list={todoList}  />
+              <CardList list={todoList} />
             ) : (
               <>
                 {status === StatusConstants.approved ? (
-                  <CardList list={approvedList}/>
+                  <CardList list={approvedList} />
                 ) : (
                   <>
                     {status === StatusConstants.inProgress ? (
@@ -46,7 +47,7 @@ const section = ({ status }: any) => {
   );
 };
 
-const SectionHeader = ({ status }: any) => {
+const SectionHeader = ({ status }: { status: string }) => {
   let color = "";
   let bgColor = "";
   if (status === StatusConstants.todo) {
@@ -64,6 +65,7 @@ const SectionHeader = ({ status }: any) => {
   }
   return (
     <div className="flex justify-between items-center py-3 px-3 border-[#E6E8EC] bg-[#ffff] border-[1px] border-r-[0px] h-[60px] font-pop-semi">
+      {/* Drag and Drop Column title and plus and option icons */}
       <Status status={status} color={color} bgColor={bgColor} />
       <div className="flex">
         <img src={plusBlack} alt="plus" className="w-[20px] h-[20px] m-[6px]" />

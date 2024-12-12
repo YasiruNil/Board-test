@@ -1,6 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import list from "./data.json";
 import { StatusConstants } from "../../util/constants";
+import {
+  TaskGroup,
+  TaskList,
+  TaskState,
+} from "../../interfaces/task.interface";
+import { DropResult } from "@hello-pangea/dnd";
 
 const initialState = {
   tasks: {
@@ -10,59 +17,77 @@ const initialState = {
     rejectedList: [],
     inProgressList: [],
   },
-};
+} as TaskState;
 
 const taskSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
-    setTodoList: (state: any, action: PayloadAction<any>) => {
+    setTodoList: (state: TaskState, action: PayloadAction<TaskList[]>) => {
       state.tasks.todoList = action.payload;
     },
-    setRejectedList: (state: any, action: PayloadAction<any>) => {
+    setRejectedList: (state: TaskState, action: PayloadAction<TaskList[]>) => {
       state.tasks.rejectedList = action.payload;
     },
-    setApprovedList: (state: any, action: PayloadAction<any>) => {
+    setApprovedList: (state: TaskState, action: PayloadAction<TaskList[]>) => {
       state.tasks.approvedList = action.payload;
     },
 
-    setInProgressList: (state: any, action: PayloadAction<any>) => {
+    setInProgressList: (
+      state: TaskState,
+      action: PayloadAction<TaskList[]>
+    ) => {
       state.tasks.inProgressList = action.payload;
     },
-    moveTasks: (state: any, action: PayloadAction<any>) => {
+    moveTasks: (state: TaskState, action: PayloadAction<DropResult>) => {
       const findMovedItem = state.tasks.tasksList.find(
-        (item: any) => item.id === action.payload.draggableId
+        (item: TaskList) => item.id === action.payload.draggableId
       );
+      // draggable id, destination and source should not be undefined or null to move item
       if (
-        action.payload.destination.droppableId !==
-        action.payload.source.droppableId
+        findMovedItem &&
+        action.payload.destination &&
+        action.payload.source
       ) {
-       
-        addMoveItemToTheRelaventGroup(
-          findMovedItem,
-          action.payload.destination,
-          state.tasks
-        );
-        removeAlreadyMovedTask(
-          action.payload.draggableId,
-          action.payload.source,
-          state.tasks
-        );
-      }else {
-        moveSameStatusItems(
-          action.payload.source,
-          action.payload.destination,
-          state.tasks);
+        // here droppableId is column id
+        // if destination and source item columns are not the same we need to add the task to the relavent column and remove from the previous coulmn
+        // if both columns are same we are trying to swap places amoung same column so .we only need to change item index
+        if (
+          action.payload.destination.droppableId !==
+          action.payload.source.droppableId
+        ) {
+          addMoveItemToTheRelaventGroup(
+            findMovedItem,
+            action.payload.destination,
+            state.tasks
+          );
+          removeAlreadyMovedTask(
+            action.payload.draggableId,
+            action.payload.source,
+            state.tasks
+          );
+        } else {
+          moveSameStatusItems(
+            action.payload.source,
+            action.payload.destination,
+            state.tasks
+          );
+        }
       }
     },
   },
 });
 
-const arraymove =( arr: any, fromIndex: number, toIndex: number, on = 1)=> {
-  return arr.splice(toIndex, 0, ...arr.splice(fromIndex, on)), arr
-}
+const arraymove = (
+  arr: TaskList[],
+  fromIndex: number,
+  toIndex: number,
+  on = 1
+) => {
+  return arr.splice(toIndex, 0, ...arr.splice(fromIndex, on)), arr;
+};
 
-const insert = (arr: string | any[], index: any, newItem: any) => [
+const insert = (arr: string | any[], index: number, newItem: TaskList) => [
   // part of the array before the specified index
   ...arr.slice(0, index),
   // inserted item
@@ -71,54 +96,70 @@ const insert = (arr: string | any[], index: any, newItem: any) => [
   ...arr.slice(index),
 ];
 
-const moveSameStatusItems= (
-  source: any,
-  destination: any,
-  tasks: any)=>{
-    console.log(source,destination,tasks)
+const moveSameStatusItems = (
+  source: { index: number; droppableId: string },
+  destination: { index: number; droppableId: string },
+  tasks: TaskGroup
+) => {
   switch (destination.droppableId) {
     case StatusConstants.todo:
-      tasks.todoList = arraymove(tasks.todoList,source.index,destination.index);
+      tasks.todoList = arraymove(
+        tasks.todoList,
+        source.index,
+        destination.index
+      );
       break;
     case StatusConstants.approved:
-      tasks.approvedList = arraymove(tasks.approvedList,source.index,destination.index);
+      tasks.approvedList = arraymove(
+        tasks.approvedList,
+        source.index,
+        destination.index
+      );
       break;
     case StatusConstants.inProgress:
-      tasks.inProgressList = arraymove(tasks.inProgressList,source.index,destination.index);
+      tasks.inProgressList = arraymove(
+        tasks.inProgressList,
+        source.index,
+        destination.index
+      );
       break;
     case StatusConstants.rejected:
-      tasks.rejectedList = arraymove(tasks.rejectedList,source.index,destination.index);
+      tasks.rejectedList = arraymove(
+        tasks.rejectedList,
+        source.index,
+        destination.index
+      );
       break;
   }
-}
+};
 
-const removeAlreadyMovedTask = (id: string, source: any, tasks: any) => {
+const removeAlreadyMovedTask = (id: string, source: {index: number;droppableId: string}, tasks: TaskGroup) => {
   switch (source.droppableId) {
     case StatusConstants.todo:
       tasks.todoList = tasks.todoList.filter((item: any) => item.id !== id);
       break;
     case StatusConstants.approved:
       tasks.approvedList = tasks.approvedList.filter(
-        (item: any) => item.id !== id
+        (item: TaskList) => item.id !== id
       );
       break;
     case StatusConstants.inProgress:
       tasks.inProgressList = tasks.inProgressList.filter(
-        (item: any) => item.id !== id
+        (item: TaskList) => item.id !== id
       );
       break;
     case StatusConstants.rejected:
       tasks.rejectedList = tasks.rejectedList.filter(
-        (item: any) => item.id !== id
+        (item: TaskList) => item.id !== id
       );
       break;
   }
 };
 
 const addMoveItemToTheRelaventGroup = (
-  findMovedItem: any,
-  destination: any,
-  tasks: any
+  findMovedItem: TaskList,
+  destination: {index: number; droppableId: string},
+  tasks: TaskGroup
 ) => {
   let newTaskItem = { ...findMovedItem };
   newTaskItem.status = destination.droppableId;

@@ -2,11 +2,10 @@ import { Input } from "antd";
 import { ReactNode } from "react";
 
 interface CustomInputProps {
-  
-  onChange: () => void;
+  text: string;
   prefix?: ReactNode;
   suffix?: ReactNode;
-  text: string;
+  onChange: () => void;
 }
 
 const CustomInput = ({
@@ -20,10 +19,10 @@ const CustomInput = ({
     <Input
       {...props}
       onChange={onChange}
-      suffix = {suffix}
-      prefix = {prefix}
+      suffix={suffix}
+      prefix={prefix}
       placeholder={text}
-      className="custom-input w-[240px]" 
+      className="custom-input w-[240px]"
     />
   );
 };

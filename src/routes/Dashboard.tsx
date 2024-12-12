@@ -1,13 +1,18 @@
+import { useOutletContext } from "react-router-dom";
+
+import team from "../assets/images/Team.svg";
 import ListTask from "../components/ListTask";
 import { useAppSelector } from "../redux/hooks";
-import team from "../assets/images/Team.svg";
 import pencil from "../assets/images/Pencil.svg";
+import { TaskState } from "../interfaces/task.interface";
+
 
 const dashboard = () => {
-  const { tasksList } = useAppSelector((state: any) => state.tasks);
-
+  const { isNavShow } = useOutletContext<{ isNavShow: boolean }>(); 
+  const { tasksList } = useAppSelector((state: TaskState) => state.tasks);
   return (
-    <div className="w-[calc(100vw-288px)] min-w-[800px] font-pop-semi tracking-[1px]">
+    <div className={`${isNavShow && 'w-[calc(100%-288px)]'}  min-w-[768px] font-pop-semi tracking-[1px]`}>
+      {/* Project details section */}
       <div className="h-[240px] p-[24px]">
         <div className="border-b-[1px] border-[#E6E8EC]">
           <div className="flex items-center mb-3">
@@ -32,8 +37,8 @@ const dashboard = () => {
         Latest update on 04 April, 2022
         </div>
       </div>
-      {/*  drag and drop section*/}
       <div className="h-[calc(100vh-320px)] overflow-hidden bg-[#F4F5F6]">
+        {/* Task section */}
         <ListTask tasksList={tasksList} />
       </div>
     </div>

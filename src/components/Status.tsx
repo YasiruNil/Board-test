@@ -1,4 +1,12 @@
-function Status({ status, color, bgColor }: any) {
+const Status = ({
+  status,
+  color,
+  bgColor,
+}: {
+  status: string;
+  color: string;
+  bgColor: string;
+}) => {
   return (
     <div
       className="flex justify-center items-center min-w-[100px] h-[30px] rounded-[46px] text-center font-pop-semi text-base font-medium"
@@ -7,6 +15,6 @@ function Status({ status, color, bgColor }: any) {
       {status}
     </div>
   );
-}
+};
 
 export default Status;

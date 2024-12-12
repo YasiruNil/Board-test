@@ -3,9 +3,9 @@ import { ReactNode } from "react";
 
 interface CustomButtonProps {
   type: string;
-  onClick: () => void;
   prefix?: ReactNode;
   suffix?: ReactNode;
+  onClick: () => void;
   children: ReactNode;
 }
 

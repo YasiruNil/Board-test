@@ -7,7 +7,7 @@ function MainLayout() {
   const [showNav, setShowNav] = useState(true);
 
   const handleResize = () => {
-    if (innerWidth <= 768) {
+    if (innerWidth <= 960) {
       setShowNav(false);
     } else {
       setShowNav(true);
@@ -32,7 +32,7 @@ function MainLayout() {
         {/* sidebar */}
         <Sidebar showNav={showNav} />
         {/* dashboard */}
-        <Outlet />
+        <Outlet context={{ isNavShow: showNav }} />
       </div>
     </div>
   );

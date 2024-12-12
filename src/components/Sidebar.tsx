@@ -1,22 +1,25 @@
-import image from "../assets/images/image.svg";
+import user from "../assets/images/User.svg";
 import grid from "../assets/images/grid.svg";
+import image from "../assets/images/image.svg";
 import shape from "../assets/images/shape.svg";
 import folder from "../assets/images/folder.svg";
 import arrorR from "../assets/images/arrowR.svg";
 import arrowUp from "../assets/images/arrowUp.svg";
 import message from "../assets/images/message.svg";
-import user from "../assets/images/User.svg";
+import signOut from "../assets/images/SignOut.svg";
 import calendar from "../assets/images/Calendar.svg";
 import arrowDown from "../assets/images/arrowDown.svg";
 import circleInfo from "../assets/images/InfoCircle.svg";
-import signOut from "../assets/images/SignOut.svg";
 
 interface SidebarProps {
   showNav: boolean;
 }
 
-function Sidebar({ showNav }: SidebarProps) {
-  console.log(showNav);
+const Sidebar = ({ showNav }: SidebarProps) => {
+  if (!showNav) {
+    return <></>;
+  }
+
   return (
     <div className="w-[288px] min-w-[288px] h-full border-r-[1px] border-[#E6E8EC] font-pop-semi text-base tracking-[1px]">
       <div className="flex flex-col justify-between h-full">
@@ -74,7 +77,9 @@ function Sidebar({ showNav }: SidebarProps) {
                 alt="arrorR"
                 className="w-[24px] h-[24px] m-[12px]"
               />
-              <span className="text-[#B1B5C3] font-normal">Develoment React App</span>
+              <span className="text-[#B1B5C3] font-normal">
+                Develoment React App
+              </span>
             </div>
             <div className="flex items-center">
               <img
@@ -82,7 +87,9 @@ function Sidebar({ showNav }: SidebarProps) {
                 alt="shape"
                 className="w-[24px] h-[24px] m-[12px]"
               />
-              <span className="text-[#3772FF] font-medium">Sport Xi Project</span>
+              <span className="text-[#3772FF] font-medium">
+                Sport Xi Project
+              </span>
             </div>
             <div className="flex items-center">
               <img
@@ -90,7 +97,9 @@ function Sidebar({ showNav }: SidebarProps) {
                 alt="arrorR"
                 className="w-[24px] h-[24px] m-[12px]"
               />
-              <span className="text-[#B1B5C3] font-normal">Wordpress theme</span>
+              <span className="text-[#B1B5C3] font-normal">
+                Wordpress theme
+              </span>
             </div>
           </div>
           <div className=" w-[240px] rounded-[8px] mt-[14px] flex items-center justify-between">
@@ -155,6 +164,6 @@ function Sidebar({ showNav }: SidebarProps) {
       </div>
     </div>
   );
-}
+};
 
 export default Sidebar;
