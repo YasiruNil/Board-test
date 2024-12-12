@@ -10,14 +10,16 @@ import {
 import { DropResult } from "@hello-pangea/dnd";
 
 const initialState = {
-  tasks: localStorage.getItem("tasks") ? JSON.parse(localStorage.getItem("tasks") || "[]") : {
-    tasksList: list.data,
-    todoList: [],
-    approvedList: [],
-    rejectedList: [],
-    inProgressList: [],
-    searchValue: ''
-  },
+  tasks: localStorage.getItem("tasks")
+    ? JSON.parse(localStorage.getItem("tasks") || "[]")
+    : {
+        tasksList: list.data,
+        todoList: [],
+        approvedList: [],
+        rejectedList: [],
+        inProgressList: [],
+        searchValue: "",
+      },
 } as TaskState;
 
 const taskSlice = createSlice({
