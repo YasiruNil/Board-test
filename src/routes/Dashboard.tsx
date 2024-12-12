@@ -10,6 +10,7 @@ import { TaskState } from "../interfaces/task.interface";
 const dashboard = () => {
   const { isNavShow } = useOutletContext<{ isNavShow: boolean }>(); 
   const { tasksList } = useAppSelector((state: TaskState) => state.tasks);
+  
   return (
     <div className={`${isNavShow && 'w-[calc(100%-288px)]'}  min-w-[768px] font-pop-semi tracking-[1px]`}>
       {/* Project details section */}

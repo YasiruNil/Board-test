@@ -10,7 +10,7 @@ import {
 import { DropResult } from "@hello-pangea/dnd";
 
 const initialState = {
-  tasks: {
+  tasks: JSON.parse(localStorage.getItem("tasks") || "[]") || {
     tasksList: list.data,
     todoList: [],
     approvedList: [],
@@ -73,10 +73,21 @@ const taskSlice = createSlice({
             state.tasks
           );
         }
+
+        updateTaskList(state.tasks);
       }
     },
   },
 });
+
+const updateTaskList = (tasks: TaskGroup) => {
+  tasks.tasksList = [
+    ...tasks.todoList,
+    ...tasks.approvedList,
+    ...tasks.inProgressList,
+    ...tasks.rejectedList,
+  ];
+};
 
 const arraymove = (
   arr: TaskList[],
@@ -133,7 +144,11 @@ const moveSameStatusItems = (
   }
 };
 
-const removeAlreadyMovedTask = (id: string, source: {index: number;droppableId: string}, tasks: TaskGroup) => {
+const removeAlreadyMovedTask = (
+  id: string,
+  source: { index: number; droppableId: string },
+  tasks: TaskGroup
+) => {
   switch (source.droppableId) {
     case StatusConstants.todo:
       tasks.todoList = tasks.todoList.filter((item: any) => item.id !== id);
@@ -158,7 +173,7 @@ const removeAlreadyMovedTask = (id: string, source: {index: number;droppableId: 
 
 const addMoveItemToTheRelaventGroup = (
   findMovedItem: TaskList,
-  destination: {index: number; droppableId: string},
+  destination: { index: number; droppableId: string },
   tasks: TaskGroup
 ) => {
   let newTaskItem = { ...findMovedItem };
